@@ -68,6 +68,10 @@ src/
 ⚙️ Environment Variables
 DATABASE_URL=
 JWT_SECRET=secret code
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=465
+SMTP_USER=
+SMTP_PASS=
 
 # Admin Helper
 
