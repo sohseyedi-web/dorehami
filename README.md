@@ -1,8 +1,5 @@
 # Comment Management System - Next.js Project
-<<<<<<< HEAD
 
-=======
->>>>>>> 4e24ed48d8b4ab623f5abb7962b03f7404f66e9e
 Overview
 A modern comment management system built with Next.js 13+ and TypeScript, featuring a responsive design and real-time updates.
 
@@ -17,11 +14,7 @@ Loading states and animations
 Responsive design with Tailwind CSS
 🛠️ Tech Stack
 
-<<<<<<< HEAD
-- Next.js 15+
-=======
 - Next.js 15
->>>>>>> 4e24ed48d8b4ab623f5abb7962b03f7404f66e9e
 - TypeScript
 - Tailwind CSS
 - React Query
