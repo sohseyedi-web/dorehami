@@ -1,4 +1,4 @@
-Comment Management System - Next.js Project
+# Comment Management System - Next.js Project
 Overview
 A modern comment management system built with Next.js 13+ and TypeScript, featuring a responsive design and real-time updates.
 
