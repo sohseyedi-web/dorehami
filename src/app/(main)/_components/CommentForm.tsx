@@ -1,7 +1,9 @@
 'use client';
 import { useSendComment } from '@/hooks/useComments';
+import { useMe } from '@/hooks/useAuth';
 import { CommentInput } from '@/types';
 import Button from '@/ui/Button';
+import axios from 'axios';
 import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useForm } from 'react-hook-form';
@@ -9,6 +11,7 @@ import toast from 'react-hot-toast';
 
 export default function CommentForm({ onSuccess }: { onSuccess: () => void }) {
   const [file, setFile] = useState<File | null>(null);
+  const { data: user } = useMe();
 
   const {
     register,
@@ -25,7 +28,7 @@ export default function CommentForm({ onSuccess }: { onSuccess: () => void }) {
 
   const { mutateAsync, isPending } = useSendComment();
 
-  const onSubmit = (data: CommentInput) => {
+  const onSubmit = async (data: CommentInput) => {
     mutateAsync(
       { comment: data.comment, file },
       {
@@ -40,6 +43,12 @@ export default function CommentForm({ onSuccess }: { onSuccess: () => void }) {
         },
       }
     );
+
+    await axios.post('/api/email', {
+      to: user?.user.email,
+      subject: 'ثبت نظر',
+      text: 'نظر شما ثبت شد و در حال بررسی است',
+    });
   };
 
   return (
