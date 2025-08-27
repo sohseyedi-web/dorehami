@@ -18,6 +18,7 @@ const CommentTableRow = ({ index, comment }: { index: number; comment: IComment 
   const [status, setStatus] = useState<STATUS>(comment.status);
   const [open, setOpen] = useState(false);
   const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [downloadError, setDownloadError] = useState<string | null>(null);
 
   const handleChange = (newStatus: STATUS) => {
     setStatus(newStatus);
@@ -30,13 +31,30 @@ const CommentTableRow = ({ index, comment }: { index: number; comment: IComment 
   };
 
   const handleDownload = () => {
-    if (comment.fileUrl) {
+    try {
+      if (!comment.fileUrl) {
+        throw new Error('آدرس فایل موجود نیست');
+      }
+
       const link = document.createElement('a');
       link.href = comment.fileUrl;
-      link.download = comment.fileName || 'download';
+
+      // استفاده از نام فایل اصلی یا نام پیش‌فرض
+      const fileName = comment.fileName || `document-${comment.id}.pdf`;
+      link.download = fileName;
+
+      // برای اطمینان از اینکه لینک در پس‌زمینه باز نمی‌شود
+      link.target = '_blank';
+
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+
+      setDownloadError(null);
+    } catch (error) {
+      console.error('خطا در دانلود فایل:', error);
+      setDownloadError('خطا در دانلود فایل. لطفاً دوباره تلاش کنید.');
+      toast.error('خطا در دانلود فایل');
     }
   };
 
@@ -45,6 +63,13 @@ const CommentTableRow = ({ index, comment }: { index: number; comment: IComment 
       handleDownload();
     } else {
       setImageModalOpen(true);
+    }
+  };
+
+  // تابع برای باز کردن PDF در تب جدید (اگر دانلود کار نکرد)
+  const handleOpenPdfInNewTab = () => {
+    if (comment.fileUrl) {
+      window.open(comment.fileUrl, '_blank');
     }
   };
 
@@ -61,8 +86,11 @@ const CommentTableRow = ({ index, comment }: { index: number; comment: IComment 
         </td>
         <td className="border-zinc-900 border p-2">
           {hasFile ? (
-            <button onClick={handlePreview} className={`py-1 rounded bg-zinc-800 text-sm w-full`}>
-              {isPdf ? ' PDF' : 'عکس'}
+            <button
+              onClick={handlePreview}
+              className={`py-1 rounded bg-zinc-800 text-sm w-full hover:bg-zinc-700 transition-colors`}
+            >
+              {isPdf ? 'PDF' : 'عکس'}
             </button>
           ) : (
             'بدون فایل'
@@ -100,12 +128,23 @@ const CommentTableRow = ({ index, comment }: { index: number; comment: IComment 
         {hasFile && (
           <div className="mt-4">
             <p className="text-zinc-400 mb-2">فایل پیوست شده:</p>
-            <button
-              onClick={handleDownload}
-              className="px-3 py-1 bg-zinc-700 text-white rounded hover:bg-zinc-700 transition-colors"
-            >
-              {isPdf ? 'دانلود PDF' : 'دانلود تصویر'}
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={handleDownload}
+                className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+              >
+                {isPdf ? 'دانلود PDF' : 'دانلود تصویر'}
+              </button>
+              {isPdf && (
+                <button
+                  onClick={handleOpenPdfInNewTab}
+                  className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
+                >
+                  مشاهده در تب جدید
+                </button>
+              )}
+            </div>
+            {downloadError && <p className="text-red-400 text-sm mt-2">{downloadError}</p>}
           </div>
         )}
       </Modal>
