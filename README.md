@@ -1,4 +1,5 @@
-Comment Management System - Next.js Project
+# Comment Management System - Next.js Project
+
 Overview
 A modern comment management system built with Next.js 13+ and TypeScript, featuring a responsive design and real-time updates.
 
@@ -13,29 +14,35 @@ Loading states and animations
 Responsive design with Tailwind CSS
 🛠️ Tech Stack
 
-- Next.js 13+
+- Next.js 15+
 - TypeScript
 - Tailwind CSS
-- NextAuth.js
 - React Query
 - React Hot Toast
 
-📦 Installation# Clone the repository
-git clone [your-repo-url]
+## 📦 Installation
 
-# Install dependencies
+1. Clone the repository:
 
+```bash
+git clone https://github.com/sohseyedi-web/dorehami
+```
+
+2. Install dependencies:
+
+```bash
 npm install
+```
 
-# Create environment file
+3. Run the development server:
 
-cp .env.example .env.local
-
-# Run development server
-
+```bash
 npm run dev
+```
 
-🗂️ Project Structuresrc/
+## 🗂️ Project Structure
+
+src/
 ├── app/
 │ ├── (admin)/
 │ │ └── admin/
@@ -55,10 +62,17 @@ npm run dev
 ├── hooks/
 ├── types/
 └── providers/
+└── utils/
+└── middleware.ts
 
 ⚙️ Environment Variables
 DATABASE_URL=
 JWT_SECRET=secret code
+
+# Admin Helper
+
+email : dorehami@gmail.com
+password : 123456789
 
 📝 License
 MIT
