@@ -25,7 +25,6 @@ const CommentTableRow = ({ index, comment }: { index: number; comment: IComment 
 
   const hanldeDelete = async () => {
     await deleteComment({ id: comment.id });
-    toast.success('حذف شد');
   };
 
   return (

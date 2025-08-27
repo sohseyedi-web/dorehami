@@ -42,7 +42,7 @@ export function useDeleteComment() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-comments'] });
       queryClient.invalidateQueries({ queryKey: ['admin-stats'] });
-      toast.success('تغییر وضعیت یافت');
+      toast.success('حذف شد');
     },
   });
 }
