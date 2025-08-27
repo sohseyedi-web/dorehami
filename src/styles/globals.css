@@ -1,0 +1,40 @@
+@import url('https://v1.fontapi.ir/css/Vazir');
+@import 'tailwindcss';
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Vazir', sans-serif;
+    box-sizing: border-box;
+  }
+}
+
+body {
+  background-color: #161616;
+}
+
+.horizontal-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #2cb67d #161616;
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-track {
+  background: #161616;
+  border-radius: 4px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb {
+  background: #2cb67d;
+  border-radius: 4px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb:hover {
+  background: #249d69;
+}
