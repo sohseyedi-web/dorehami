@@ -28,7 +28,7 @@ export default function AdminPage() {
   return (
     <section className="flex" dir="rtl">
       <Sidebar />
-      <main className="flex-1 p-4 lg:p-6">
+      <main className="flex-1 p-4 lg:p-6 overflow-x-auto horizontal-scroll">
         <CommentTable />
       </main>
     </section>

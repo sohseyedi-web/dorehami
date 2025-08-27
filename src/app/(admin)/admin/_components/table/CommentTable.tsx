@@ -47,26 +47,23 @@ const CommentTable = () => {
   return (
     <>
       <div className="w-full overflow-x-auto">
-        <div className="min-w-[800px]">
-          <TableSearch search={searchTerm} setSearch={setSearchTerm} />
-
-          <table className="w-full border-collapse border border-zinc-700 bg-black text-right">
-            <TableHeader />
-            <tbody>
-              {filteredComments.length > 0 ? (
-                filteredComments.map((comment: IComment, index: number) => (
-                  <CommentTableRow key={comment.id} index={index} comment={comment} />
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={commentTHeads.length} className="text-center py-8 text-zinc-400">
-                    {searchTerm ? 'نتیجه‌ای یافت نشد' : 'هنوز نظری ثبت نشده است'}
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+        <TableSearch search={searchTerm} setSearch={setSearchTerm} />
+        <table className="w-full min-w-[800px] border-collapse border border-zinc-700 bg-black text-right">
+          <TableHeader />
+          <tbody>
+            {filteredComments.length > 0 ? (
+              filteredComments.map((comment: IComment, index: number) => (
+                <CommentTableRow key={comment.id} index={index} comment={comment} />
+              ))
+            ) : (
+              <tr>
+                <td colSpan={commentTHeads.length} className="text-center py-8 text-zinc-400">
+                  {searchTerm ? 'نتیجه‌ای یافت نشد' : 'هنوز نظری ثبت نشده است'}
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </>
   );
