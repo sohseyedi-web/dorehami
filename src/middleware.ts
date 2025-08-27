@@ -23,6 +23,10 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/', req.url));
   }
 
+  if (url.startsWith('/') && decoded.role === 'ADMIN') {
+    return NextResponse.redirect(new URL('/admin', req.url));
+  }
+
   if (url.startsWith('/admin') && decoded.role !== 'ADMIN') {
     return NextResponse.redirect(new URL('/', req.url));
   }
