@@ -13,7 +13,7 @@ Loading states and animations
 Responsive design with Tailwind CSS
 🛠️ Tech Stack
 
-- Next.js 13+
+- Next.js 15
 - TypeScript
 - Tailwind CSS
 - NextAuth.js
